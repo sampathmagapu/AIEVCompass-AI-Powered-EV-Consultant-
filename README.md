@@ -1,116 +1,128 @@
 # 🚗⚡ AIEVCompass – AI-Powered Electric Vehicle Consultant
-**Shell – Edunet Foundation – AICTE Green Skill Internship Project**
+### *Shell – Edunet Foundation – AICTE Green Skill Internship Project*
 
-AIEVCompass is an end-to-end **AI-powered EV consulting system** built with a **Hybrid AI ("Two-Brain") architecture**.  
-It uses a conversational chatbot to interview users and then feeds that data into a **92.4% accurate expert ML system** that predicts:
+AIEVCompass is an end-to-end **AI-powered EV consulting system** using a unique **Hybrid AI "Two-Brain" Architecture"**:
 
-- **EV Price** (based on specifications)  
-- **Driving Range** (based on performance & efficiency)  
-- **Market Segment** (Budget / Mid-Range / Premium / Luxury)
+- 🧠 **Language Brain (DialoGPT-small)** — Conversational AI that interviews users  
+- 🔢 **Math Brain (Expert ML Engine)** — Price & Range predictions using feature engineering  
 
----
+The system predicts:
 
-## 🎯 What This System Does
-
-| Module | Task | Output |
-|--------|------|--------|
-| **Price Prediction System (92% accuracy)** | Predict EV market price | Estimated Price |
-| **Range Prediction Model** | Predict EV driving range | Predicted Range (km) |
-| **Range Category Classifier** | Classify EVs as Short/Medium/Long range | Category Label |
-
-This enables *What-If EV Analysis*, such as:
-
-> “If we build a ₹25L EV with 60 kWh battery, what range should it have?”  
-> “If a car has 500 km range, what should be its fair price?”
+- **EV Price** (Customer Mode — 13 engineered features)  
+- **EV Range** (Company Mode — 66 engineered features)  
+- **Market Segment** (Budget / Mid / Premium / Luxury)
 
 ---
 
-## 🧠 Two-Brain Hybrid AI Architecture
+## 🧠 Hybrid AI Architecture
 
-### **🧠 Brain 1 — The “Math Brain” (Expert ML Models)**  
-The 92.4% accurate price modeling system uses multiple ML models + scalers to produce mathematically reliable predictions.
+### 1️⃣ **Language Brain — Conversational AI**
+Powered by **DialoGPT-small**, it extracts features naturally from user text:
+> “I want a 400 km range EV” → Range = 400  
+> “Top speed around 200” → Top_Speed = 200  
 
-| Segment | ±15% Accuracy | ±10% Accuracy | Avg Error ($) |
-|--------|:--------------:|:-------------:|:-------------:|
-| Budget | 75% | 66.7% | ~$3,383 |
-| Mid-Range | **92.9%** | **78.6%** | ~$3,448 |
-| Premium | **100%** | **100%** | ~$3,107 |
-| Luxury | **100%** | 85.7% | ~$3,787 |
+### 2️⃣ **Math Brain — Expert ML Engine**
+Includes two modules:
 
-### **💬 Brain 2 — The “Language Brain” (Chatbot Interviewer)**  
-A lightweight local LLM (**DialoGPT-small**) guides users through questions to collect EV features conversationally.
+#### **Customer Mode – Price Prediction**
+Uses 7 user-given inputs → engineered into 13 ML features.
 
-### **🔁 How the Flow Works**
+#### **Company Mode – Range Prediction**
+Uses 8 engineering inputs → converted into a 66-feature vector.
 
-1. User starts a chat.  
-2. Chatbot asks guided questions (Battery size? Range? Power? etc.)  
-3. Answers are stored and validated.  
-4. Collected features → Scalers → ML Models  
-5. Price / Range / Category predictions are generated.  
-6. Chatbot presents the results conversationally.
+Both run inside Streamlit via a custom UI.
 
 ---
 
 ## 🧰 Technology Stack
 
-| Layer | Tools | Purpose |
-|------|-------|---------|
-| **Machine Learning** | scikit-learn, pandas, numpy | Expert "Math Brain" |
-| **Generative AI** | transformers, torch | Chat-based "Language Brain" |
-| **Frontend / App** | Streamlit | Chat Interface (app/app.py) |
-| **Development** | JupyterLab, matplotlib | Analysis & validation |
-| **Version Control** | Git & GitHub | Project hosting |
+| Component | Tools |
+|----------|-------|
+| ML Models | scikit-learn, numpy, pandas |
+| LLM | transformers, DialoGPT-small, PyTorch |
+| Frontend | Streamlit |
+| Notebooks | Jupyter, matplotlib, seaborn |
+| Deployment | Gunicorn, Torch CPU |
 
 ---
 
 ## 🗂 Project Structure
 
-```
-
+```plaintext
 AIEVCompass/
 │
 ├── AIEVCompass_Dataset/
 │   ├── cars_data_RAW.csv
 │   └── cars_data_cleaned.csv
 │
-├── models/
-│   │
+├── models/                      
 │   ├── price/
-│   │   ├── price_category_classifier.pkl
-│   │   ├── price_model_budget.pkl
-│   │   ├── price_model_mid-range.pkl
-│   │   ├── price_model_premium.pkl
-│   │   ├── price_model_luxury.pkl
-│   │   └── price_segment_scalers.pkl
-│   │
 │   └── range/
-│       ├── range_category_classifier.pkl
-│       ├── range_prediction_model.pkl
-│       └── range_feature_scaler.pkl
+│
+├── app/
+│   └── app.py                   
 │
 ├── notebooks/
 │   ├── AIEVCompass.ipynb
 │   └── Chatbot_Playground.ipynb
 │
-├── app/
-│   └── app.py
-│
 ├── requirements.txt
 └── README.md
-
 ````
+
+---
+
+## 💬 Conversation Modes
+
+### **Customer Mode (Price Prediction)**
+
+Chatbot collects:
+
+* Range
+* Battery
+* Top Speed
+* Acceleration
+* Fast Charging
+* Brand
+* Drive Type
+
+Models return:
+
+* **Estimated Price ($)**
+* **Market Segment (Budget → Luxury)**
+
+---
+
+### **Company Mode (Range Prediction)**
+
+Chatbot collects:
+
+* Battery
+* Top Speed
+* Efficiency
+* Fast Charging
+* Brand
+* Model Name
+* Drive Type
+* Tow Hitch
+
+Models return:
+
+* **Estimated Range (km)**
+* **Range Category (Very Short → Very Long)**
 
 ---
 
 ## 🏃 How to Run
 
 ### 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/sampathmagapu/AIEVCompass-AI-Powered-EV-Consultant-.git
 cd AIEVCompass-AI-Powered-EV-Consultant-
-````
+```
 
-### 2️⃣ Create & activate a virtual environment
+### 2️⃣ Create a virtual environment
 
 ```bash
 python -m venv venv
@@ -122,23 +134,45 @@ python -m venv venv
 .\venv\Scripts\activate
 ```
 
-**Mac/Linux:**
+**Linux/Mac:**
 
 ```bash
 source venv/bin/activate
 ```
 
-### 3️⃣ Install dependencies
+### 3️⃣ Install requirements
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4️⃣ Run the Streamlit application
+### 4️⃣ Download DialoGPT-small
+
+Place it at:
+
+```
+C:\DialoGPT-small
+```
+
+(or update the path in `app.py`)
+
+### 5️⃣ Run Streamlit App
 
 ```bash
 streamlit run app/app.py
 ```
+
+---
+
+## 🎨 Features
+
+* Dark themed Streamlit UI
+* Sidebar navigation
+* Two modes (Customer & Company)
+* NLP input → Feature extraction
+* Beautiful prediction cards
+* Advanced engineered features
+* About/Profile section
 
 ---
 
@@ -147,5 +181,6 @@ streamlit run app/app.py
 **Sampath Magapu**
 📧 Email: *[sampathmagapu11@gmail.com](mailto:sampathmagapu11@gmail.com)*
 🔗 LinkedIn: [https://www.linkedin.com/in/sampath-magapu-9b5102253/](https://www.linkedin.com/in/sampath-magapu-9b5102253/)
+💻 GitHub: [https://github.com/sampathmagapu](https://github.com/sampathmagapu)
 
 ```
