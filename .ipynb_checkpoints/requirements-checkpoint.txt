@@ -1,0 +1,87 @@
+# ----------------------------
+# Core Data Science Libraries
+# ----------------------------
+pandas==2.2.3
+numpy==1.26.4
+scikit-learn==1.5.2
+joblib==1.4.2
+
+# ----------------------------
+# Web App Framework
+# ----------------------------
+streamlit==1.39.0
+
+# ----------------------------
+# Hugging Face & LLM Handling
+# ----------------------------
+transformers==4.44.2
+accelerate==1.11.0
+huggingface-hub==0.25.2
+safetensors==0.4.3
+tokenizers==0.21.0
+protobuf==4.25.3
+
+# ----------------------------
+# PyTorch CPU ONLY (required for HF Spaces)
+# ----------------------------
+torch==2.5.1+cpu
+torchaudio==2.5.1+cpu
+torchvision==0.20.1+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# ----------------------------
+# Data Visualization
+# ----------------------------
+matplotlib==3.9.2
+seaborn==0.13.2
+plotly==5.24.1
+
+# ----------------------------
+# Image Processing (for profile picture)
+# ----------------------------
+Pillow==11.0.0
+opencv-python-headless==4.10.0.84
+
+# ----------------------------
+# Data Processing & Utilities
+# ----------------------------
+scipy==1.14.1
+requests==2.32.3
+urllib3==2.2.3
+
+# ----------------------------
+# Development & Debugging
+# ----------------------------
+tqdm==4.67.1
+python-dotenv==1.0.1
+Jinja2==3.1.4
+
+# ----------------------------
+# Data Serialization
+# ----------------------------
+pickle-mixin==1.0.2
+pyyaml==6.0.1
+
+# ----------------------------
+# Date/Time Handling
+# ----------------------------
+python-dateutil==2.9.0.post0
+
+# ----------------------------
+# Optional: For advanced ML features
+# ----------------------------
+xgboost==2.1.2
+lightgbm==4.5.0
+catboost==1.2.7
+
+# ----------------------------
+# Optional: For model explainability
+# ----------------------------
+shap==0.45.1
+lime==0.2.0.1
+
+# ----------------------------
+# Optional: For deployment & monitoring
+# ----------------------------
+gunicorn==23.0.0
+psutil==5.9.8
